@@ -7,8 +7,8 @@ import pandas as pd
 application = Flask(__name__)
 app = application
 
-scaler = pickle.load(open(r'Model\StandardScaler.pkl','rb'))
-model = pickle.load(open(r'Model\prediction.pkl','rb'))
+scaler = pickle.load(open(r'Model/StandardScaler.pkl','rb'))
+model = pickle.load(open(r'Model/prediction.pkl','rb'))
 
 @app.route('/')
 def index():
@@ -18,7 +18,7 @@ def index():
 def predict_datapoint():
     result=""
 
-    if request.methods=='POST':
+    if request.method=='POST':
         Pregnancies = int(request.form.get("Pregnancies"))
         Glucose = int(request.form.get("Glucose"))
         BloodPressure = int(request.form.get("BloodPressure"))
@@ -41,5 +41,5 @@ def predict_datapoint():
     else:
         return render_template('home.html')
     
-if __name__=="main":
+if __name__=="__main__":
     app.run(host="0.0.0.0")
